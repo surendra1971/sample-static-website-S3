@@ -24,6 +24,7 @@ resource "aws_s3_bucket_public_access_block" "example" {
   restrict_public_buckets = false
 }
 
+# making bucket as public
 resource "aws_s3_bucket_acl" "example" {
   depends_on = [
     aws_s3_bucket_ownership_controls.example,
@@ -32,4 +33,24 @@ resource "aws_s3_bucket_acl" "example" {
 
   bucket = aws_s3_bucket.mybucket.id
   acl    = "public-read"
+}
+
+
+resource "aws_s3_object" "index" {
+  bucket = "aws_s3_bucket.mybucket.id"
+  key    = "index.html"
+  source = "index.html"
+  acl    = "public-read"
+  content_type = "text/html"
+  
+}
+
+
+resource "aws_s3_object" "error" {
+  bucket = "aws_s3_bucket.mybucket.id"
+  key    = "error.html"
+  source = "error.html"
+  acl    = "public-read"
+  content_type = "text/html"
+  
 }
