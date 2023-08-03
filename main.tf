@@ -54,3 +54,12 @@ resource "aws_s3_object" "error" {
   content_type = "text/html"
   
 }
+
+resource "aws_s3_object" "picture" {
+  bucket = "aws_s3_bucket.mybucket.id"
+  key    = "picture.png"
+  source = "picture.png"
+  acl    = "public-read"
+  
+}
+
